@@ -17,7 +17,15 @@ pub struct Cpu {
 }
 
 impl Cpu {
+    pub fn new() -> Self {
+        let mut ctx = Ctx::default();
+        Self {
+            regs: Registers::default(),
+            ctx,
+        }
+    }
     pub fn emulate_cycle(&mut self, bus: &mut Peripherals) {
+        self.fetch(bus);
         self.decode(bus);
     }
 }
